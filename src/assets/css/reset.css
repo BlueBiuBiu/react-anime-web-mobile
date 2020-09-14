@@ -1,0 +1,6 @@
+@import '~normalize.css';
+@import '~antd/dist/antd.css';
+
+body {
+  background: rgba(0,0,0,.7);
+}
