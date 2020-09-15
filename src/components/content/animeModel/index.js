@@ -4,8 +4,9 @@ import { Carousel } from 'antd'
 import { animeModel } from '@/common/animeModel'
 import AnimeCover from '@/components/content/animeCover'
 import { AnimeModelWrapper } from './style'
+import { withRouter } from 'react-router-dom'
 
-export default memo(function index(props) {
+const Index = memo(function index(props) {
 
   const { title } = props;
 
@@ -13,13 +14,13 @@ export default memo(function index(props) {
     <AnimeModelWrapper>
       <div className='title'>
         <span className="type">{title}</span>
-        <span className="more">查看更多</span>
+        <span className="more" onClick={e => JumpToMore()}>查看更多</span>
       </div>
       <Carousel dots={false} className="carousel">
         {
           [0,1].map(item => {
             return (
-              <div className="carousel-item">
+              <div key={item} className="carousel-item">
                 {
                   animeModel.slice(item*3,(item+1)*3).map(item => {
                     return (
@@ -34,4 +35,11 @@ export default memo(function index(props) {
       </Carousel>
     </AnimeModelWrapper>
   )
+
+  function JumpToMore(){
+    props.history.push('/more')
+  }
+
 })
+
+export default withRouter(Index)

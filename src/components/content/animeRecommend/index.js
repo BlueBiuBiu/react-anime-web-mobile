@@ -1,15 +1,16 @@
 import React, { memo } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import { AnimeRecommendWrapper } from './style'
 import { animeRecommend } from '@/common/animeRecommend'
 import AnimeCover from '@/components/content/animeCover'
 
-export default memo(function index() {
+const Index = memo(function index(props) {
   return (
     <AnimeRecommendWrapper>
       <div className='title'>
         <span className="type">热门推荐</span>
-        <span className="more">查看更多</span>
+        <span className="more" onClick={e => JumpToMore()}>查看更多</span>
       </div>
       <div className="content">
         {
@@ -22,4 +23,11 @@ export default memo(function index() {
       </div>
     </AnimeRecommendWrapper>
   )
+
+  function JumpToMore(){
+    props.history.push('/more')
+  }
+
 })
+
+export default withRouter(Index)
