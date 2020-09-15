@@ -1,21 +1,23 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { BrowserRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
+import { Provider } from 'react-redux'
 
 import { routes } from '@/router'
+import store from './store'
 
 import MainTabbar from '@/components/content/mainTabbar'
 
 
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
       <BrowserRouter>
         <MainTabbar />
         {renderRoutes(routes)}
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 
-export default App;
+export default memo(App);
