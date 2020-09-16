@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { LeftOutlined } from '@ant-design/icons'
 import { withRouter } from 'react-router-dom'
@@ -13,6 +13,7 @@ const Index = memo(function Index(props) {
   const [typeIndex, settypeIndex] = useState(0)
   const [birthIndex, setbirthIndex] = useState(0)
   const [rankIndex, setrankIndex] = useState(0)
+  const [size, setsize] = useState(15)
   const [place, setplace] = useState('全部')
   const [type, settype] = useState('全部')
   const [birth, setbirth] = useState('全部')
@@ -32,23 +33,25 @@ const Index = memo(function Index(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getMoreAnime(type, place, birth, '全部', 1, 15))
-  }, [type, place, birth])
+    dispatch(getMoreAnime(type, place, birth, '全部', 1, size))
 
-  useEffect(() => {
     const wrapper = document.querySelector('.wrapper')
     const scroll = new BScroll(wrapper, {
       click: true,
       scrollX: true,
+      useTransition: false,
       freeScroll: true,
       eventPassthrough: 'horizontal',
       pullUpLoad: true
     })
     scroll.on('pullingUp', () => {
-      console.log('------');
-      scroll.finishPullUp();
+      setsize(size + 15)
+      dispatch(getMoreAnime(type, place, birth, '全部', 1, size))
+      console.log('-----',size);
+      scroll.refresh()
     })
-  })
+  }, [type, place, birth,size])
+
 
   return (
     <div className="wrapper" style={{ position: 'fixed', left: "0", right: "0", top: "0", bottom: "57px", overflow: "hidden" }}>

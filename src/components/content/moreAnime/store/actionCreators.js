@@ -13,3 +13,6 @@ export const getMoreAnime = (type,place,birth,language,page,size) => {
     })
   }
 }
+
+
+
