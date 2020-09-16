@@ -1,10 +1,12 @@
 import React, { memo, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { LeftOutlined } from '@ant-design/icons'
 import { withRouter } from 'react-router-dom'
+import BScroll from 'better-scroll'
 
 import { MoreAnimeWrapper } from './style'
 import { getMoreAnime } from './store/actionCreators'
+import AnimeCover from '@/components/content/animeCover'
 
 const Index = memo(function Index(props) {
   const [placeIndex, setplaceIndex] = useState(0)
@@ -22,65 +24,98 @@ const Index = memo(function Index(props) {
     '2003', '2002', '2001', '2000', '90年代', '80年代', '更早']
   const animeRank = ['最新', '人气', '最热']
 
+
+  const { moreAnime } = useSelector(state => ({
+    moreAnime: state.getIn(['moreAnime', 'moreAnime'])
+  }), shallowEqual)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getMoreAnime(type,place,birth,'全部',1,14))
+    dispatch(getMoreAnime(type, place, birth, '全部', 1, 15))
+  }, [type, place, birth])
+
+  useEffect(() => {
+    const wrapper = document.querySelector('.wrapper')
+    const scroll = new BScroll(wrapper, {
+      click: true,
+      scrollX: true,
+      freeScroll: true,
+      eventPassthrough: 'horizontal',
+      pullUpLoad: true
+    })
+    scroll.on('pullingUp', () => {
+      console.log('------');
+      scroll.finishPullUp();
+    })
   })
+
   return (
-    <MoreAnimeWrapper>
-      <div className="title">
-        <LeftOutlined className="icon" style={{ color: "white", fontSize: 15 }} onClick={e => jumpToBefore()} />
-        <span className="anime">动漫</span>
-      </div>
-      <div className="tabControl">
-        <div>
+    <div className="wrapper" style={{ position: 'fixed', left: "0", right: "0", top: "0", bottom: "57px", overflow: "hidden" }}>
+      <MoreAnimeWrapper>
+        <div className="title">
+          <LeftOutlined className="icon" style={{ color: "white", fontSize: 15 }} onClick={e => jumpToBefore()} />
+          <span className="anime">动漫</span>
+        </div>
+        <div className="tabControl">
+          <div>
+            {
+              animePlace.map((item, index) => {
+                return (
+                  <span key={item} onClick={e => jumpToPlace(index)} className={index === placeIndex ? "active" : ""}>
+                    {item}
+                  </span>
+                )
+              })
+            }
+          </div>
+          <div>
+            {
+              animeType.map((item, index) => {
+                return (
+                  <span key={item} onClick={e => jumpToType(index)} className={index === typeIndex ? "active" : ""}>
+                    {item}
+                  </span>
+                )
+              })
+            }
+          </div>
+          <div>
+            {
+              animeBirth.map((item, index) => {
+                return (
+                  <span key={item} onClick={e => jumpToBirth(index)} className={index === birthIndex ? "active" : ""}>
+                    {item}
+                  </span>
+                )
+              })
+            }
+          </div>
+          <div>
+            {
+              animeRank.map((item, index) => {
+                return (
+                  <span key={item} onClick={e => jumpToRank(index)} className={index === rankIndex ? "active" : ""}>
+                    {item}
+                  </span>
+                )
+              })
+            }
+          </div>
+        </div>
+        <div className="content">
           {
-            animePlace.map((item, index) => {
+            moreAnime.map((item, index) => {
               return (
-                <span key={item} onClick={e => jumpToPlace(index)} className={index === placeIndex ? "active" : ""}>
-                  {item}
-                </span>
+                <div className="animeCover"><AnimeCover img={item} /></div>
               )
             })
           }
         </div>
-        <div>
-          {
-            animeType.map((item, index) => {
-              return (
-                <span key={item} onClick={e => jumpToType(index)} className={index === typeIndex ? "active" : ""}>
-                  {item}
-                </span>
-              )
-            })
-          }
-        </div>
-        <div>
-          {
-            animeBirth.map((item, index) => {
-              return (
-                <span key={item} onClick={e => jumpToBirth(index)} className={index === birthIndex ? "active" : ""}>
-                  {item}
-                </span>
-              )
-            })
-          }
-        </div>
-        <div>
-          {
-            animeRank.map((item, index) => {
-              return (
-                <span key={item} onClick={e => jumpToRank(index)} className={index === rankIndex ? "active" : ""}>
-                  {item}
-                </span>
-              )
-            })
-          }
-        </div>
-      </div>
-    </MoreAnimeWrapper>
+      </MoreAnimeWrapper>
+    </div>
   )
+
   function jumpToBefore() {
     props.history.go(-1)
 

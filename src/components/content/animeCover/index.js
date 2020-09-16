@@ -6,7 +6,7 @@ export default memo(function index(props) {
   const { img } = props;
   return (
     <AnimeCoverWrapper>
-      <img src={img.imgUrl} alt="" />
+      <img src={img.imgUrl|| img.img} alt="" />
       <div className="name">
         {img.name}
       </div>

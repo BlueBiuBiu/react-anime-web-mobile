@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const MoreAnimeWrapper = styled.div`
 
+
   .title {
     position: relative;
     text-align: center;
@@ -51,6 +52,18 @@ export const MoreAnimeWrapper = styled.div`
         margin-left: 10px;
         padding: 0 4px;
       }
+    }
+  }
+
+  .content {
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    flex-flow: wrap;
+
+    .animeCover {
+      margin-left: 6px;
+      margin-top: 5px;
     }
   }
 `
