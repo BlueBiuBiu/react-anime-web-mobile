@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { LeftOutlined } from '@ant-design/icons'
 import { withRouter } from 'react-router-dom'
@@ -47,7 +47,7 @@ const Index = memo(function Index(props) {
     scroll.on('pullingUp', () => {
       setsize(size + 15)
       dispatch(getMoreAnime(type, place, birth, '全部', 1, size))
-      console.log('-----',size);
+      // console.log('-----',size);
       scroll.refresh()
     })
   }, [type, place, birth,size])

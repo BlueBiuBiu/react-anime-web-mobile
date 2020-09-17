@@ -13,6 +13,7 @@
     "antd": "^4.6.4",
     "axios": "^0.20.0",
     "better-scroll": "^2.0.3",
+    "classnames": "^2.2.6",
     "immutable": "^4.0.0-rc.12",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
@@ -25,7 +26,8 @@
     "redux": "^4.0.5",
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "craco start",
