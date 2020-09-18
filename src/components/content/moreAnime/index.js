@@ -33,6 +33,7 @@ const Index = memo(function Index(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
+
     dispatch(getMoreAnime(type, place, birth, '全部', 1, size))
 
     const wrapper = document.querySelector('.wrapper')

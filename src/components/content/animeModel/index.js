@@ -8,8 +8,8 @@ import { withRouter } from 'react-router-dom'
 
 const Index = memo(function index(props) {
 
-  const { title } = props;
-
+  const { title, info } = props;
+  
   return (
     <AnimeModelWrapper>
       <div className='title'>
@@ -22,7 +22,7 @@ const Index = memo(function index(props) {
             return (
               <div key={item} className="carousel-item">
                 {
-                  animeModel.slice(item*3,(item+1)*3).map(item => {
+                  (info || animeModel).slice(item*3,(item+1)*3).map(item => {
                     return (
                       <AnimeCover img={item}/>
                     )

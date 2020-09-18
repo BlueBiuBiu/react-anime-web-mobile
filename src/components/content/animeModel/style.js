@@ -22,6 +22,6 @@ export const AnimeModelWrapper = styled.div`
 
   .carousel-item {
     display: flex !important;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 `
