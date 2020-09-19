@@ -12,7 +12,7 @@ export default memo(function index() {
         {
           carousel.map((item,index) => {
             return(
-              <div>
+              <div key={item}>
                 <img src={item.imgUrl} alt=""/>
               </div>
             )

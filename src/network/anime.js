@@ -11,3 +11,9 @@ export function getAnimePlayIndex(id,index){
       url: '/AllAnime/' + String(id) +'/' +String(index)
   })
 }
+
+export function getAllAnime(){
+  return request({
+    url: "/AllAnime"
+  })
+}

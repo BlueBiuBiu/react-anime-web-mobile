@@ -12,8 +12,8 @@ import AnimeFile from '@/views/recommend/c-cpns/animeFilm'
 import Collect from '@/views/collect'
 import Mine from '@/views/mine'
 import Player from '@/views/player'
+import Search from '@/views/search'
 import MoreAnime from '@/components/content/moreAnime'
-
 
 export const routes = [
   {
@@ -81,5 +81,9 @@ export const routes = [
   {
     path: "/player",
     component: Player
+  },
+  {
+    path: "/search",
+    component: Search
   },
 ]

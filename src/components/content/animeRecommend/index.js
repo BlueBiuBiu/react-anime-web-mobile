@@ -6,6 +6,9 @@ import { animeRecommend } from '@/common/animeRecommend'
 import AnimeCover from '@/components/content/animeCover'
 
 const Index = memo(function index(props) {
+
+  const { info } = props;
+
   return (
     <AnimeRecommendWrapper>
       <div className='title'>
@@ -14,7 +17,7 @@ const Index = memo(function index(props) {
       </div>
       <div className="content">
         {
-          animeRecommend.map(item => {
+          (info || animeRecommend).map(item => {
             return (
               <AnimeCover img={item}/>
             )
