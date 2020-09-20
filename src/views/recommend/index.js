@@ -17,7 +17,7 @@ const Index = memo(function Index(props) {
           routes.map((item, index) => {
             return (
               <div key={item.path} className="recommend-item">
-                <NavLink to={item.path}>{item.name}</NavLink>
+                <NavLink to={item.path} onClick={e => jumpToCenter(e)}>{item.name}</NavLink>
               </div>
             )
           })
@@ -41,6 +41,16 @@ const Index = memo(function Index(props) {
   function handleSearch() {
     props.history.push('/search')
   }
+
+  function jumpToCenter(e) {
+    const scrollLeft = e.currentTarget.offsetLeft + 28 - document.body.scrollWidth / 2
+    const wrapper = document.querySelector('.recommend')
+    wrapper.scrollTo({
+      left: scrollLeft,
+      behavior: 'smooth'
+    })
+  }
+
 })
 
 export default withRouter(Index)
